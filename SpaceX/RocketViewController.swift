@@ -34,7 +34,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rocketCell", for: indexPath) as! RocketTableViewCell
-        if let flickr_images = rockets[indexPath.row].flickr_images, let url = URL(string: flickr_images[0]) {
+        if let url = URL(string: rockets[indexPath.row].flickr_images[0]) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: url) {
                     if let image = UIImage(data: data) {
@@ -45,9 +45,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-        if let rocket_name = rockets[indexPath.row].rocket_name {
-            cell.title.text = rocket_name
-        }
+        cell.title.text = rockets[indexPath.row].rocket_name
         return cell
     }
     
@@ -78,17 +76,10 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             do {
                 if let data = data {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
-                    if let jsonArray = json {
-                        for jsonObject in jsonArray {
-                            let rocket_id = jsonObject["rocket_id"] as? String
-                            let rocket_name = jsonObject["rocket_name"] as? String
-                            let flickr_images = jsonObject["flickr_images"] as? [String]
-                            self.rockets.append(Rocket(rocket_id: rocket_id, rocket_name: rocket_name, flickr_images: flickr_images))
-                        }
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                    let decoder = JSONDecoder()
+                    self.rockets += try decoder.decode([Rocket].self, from: data)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
             } catch {

@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct Rocket {
+struct Rocket: Codable {
     
     // MARK: - Properties
     
-    var rocket_id: String?
-    var rocket_name: String?
-    var flickr_images: [String]?
+    var rocket_id: String
+    var rocket_name: String
+    var flickr_images: [String]
 }
