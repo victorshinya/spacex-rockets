@@ -13,6 +13,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Global variables
     
     lazy var rockets = [Rocket]()
+    private let api: RocketAPIContract = RocketAPI()
     
     // MARK: - IBOutlets
     
@@ -34,17 +35,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rocketCell", for: indexPath) as! RocketTableViewCell
-        if let url = URL(string: rockets[indexPath.row].flickr_images[0]) {
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            cell.backgroundImage.image = image
-                        }
-                    }
-                }
-            }
-        }
+        cell.backgroundImage.loadImageWithUrl(urlString: rockets[indexPath.row].flickr_images[0])
         cell.title.text = rockets[indexPath.row].rocket_name
         return cell
     }
@@ -56,37 +47,18 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Functions
     
     private func fetchAll() {
-        let session = URLSession.shared
-        let url = URL(string: Constants.base_api + Constants.api_rockets)!
-        let task = session.dataTask(with: url) { data, response, error in
-            if error != nil, let err = error {
-                print("error: \(err.localizedDescription)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("wrong status code")
-                return
-            }
-            
-            guard let mime = response?.mimeType, mime == "application/json" else {
-                print("wrong mime type")
-                return
-            }
-            
-            do {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    self.rockets += try decoder.decode([Rocket].self, from: data)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+        api.retrieveRocketList { (result) in
+            switch result {
+            case .success(let rocketList):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.rockets = rocketList
+                    self.tableView.reloadData()
                 }
-            } catch {
-                print("error: \(error.localizedDescription)")
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
-        task.resume()
     }
 }
 

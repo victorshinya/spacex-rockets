@@ -19,6 +19,8 @@
 		2297FFFA23159B6700890B17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297FFF923159B6700890B17 /* AppDelegate.swift */; };
 		2297FFFC23159B6700890B17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297FFFB23159B6700890B17 /* SceneDelegate.swift */; };
 		2297FFFE23159B6700890B17 /* RocketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2297FFFD23159B6700890B17 /* RocketViewController.swift */; };
+		5F9C6AE024853D3C000674FD /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9C6ADF24853D3C000674FD /* UIImageView+Cache.swift */; };
+		5F9C6AE324853F35000674FD /* RocketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9C6AE224853F35000674FD /* RocketAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		2297FFF923159B6700890B17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2297FFFB23159B6700890B17 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2297FFFD23159B6700890B17 /* RocketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketViewController.swift; sourceTree = "<group>"; };
+		5F9C6ADF24853D3C000674FD /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
+		5F9C6AE224853F35000674FD /* RocketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 		2297FFED23159B6700890B17 = {
 			isa = PBXGroup;
 			children = (
+				5F9C6AE124853F07000674FD /* API */,
+				5F9C6ADE24853D2C000674FD /* Extensions */,
 				2297FFF823159B6700890B17 /* SpaceX */,
 				2297001223159B6800890B17 /* SpaceXTests */,
 				2297001D23159B6800890B17 /* SpaceXUITests */,
@@ -146,6 +152,22 @@
 				2297000A23159B6800890B17 /* Info.plist */,
 			);
 			path = SpaceX;
+			sourceTree = "<group>";
+		};
+		5F9C6ADE24853D2C000674FD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5F9C6ADF24853D3C000674FD /* UIImageView+Cache.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5F9C6AE124853F07000674FD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5F9C6AE224853F35000674FD /* RocketAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,9 +319,11 @@
 			files = (
 				2297002E2315B12800890B17 /* RocketTableViewCell.swift in Sources */,
 				2297FFFE23159B6700890B17 /* RocketViewController.swift in Sources */,
+				5F9C6AE324853F35000674FD /* RocketAPI.swift in Sources */,
 				2297FFFA23159B6700890B17 /* AppDelegate.swift in Sources */,
 				229700302315B38D00890B17 /* Rocket.swift in Sources */,
 				229700322315B55B00890B17 /* Constants.swift in Sources */,
+				5F9C6AE024853D3C000674FD /* UIImageView+Cache.swift in Sources */,
 				2297FFFC23159B6700890B17 /* SceneDelegate.swift in Sources */,
 				2297000423159B6700890B17 /* SpaceX.xcdatamodeld in Sources */,
 			);
