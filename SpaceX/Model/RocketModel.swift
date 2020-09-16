@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Rocket: Codable {
+struct RocketModel: Codable {
     
     // MARK: - Properties
     

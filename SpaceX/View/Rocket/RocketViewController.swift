@@ -12,7 +12,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Global variables
     
-    lazy var rockets = [Rocket]()
+    lazy var rockets = [RocketModel]()
     
     // MARK: - IBOutlets
     
@@ -77,7 +77,7 @@ class RocketViewController: UIViewController, UITableViewDelegate, UITableViewDa
             do {
                 if let data = data {
                     let decoder = JSONDecoder()
-                    self.rockets += try decoder.decode([Rocket].self, from: data)
+                    self.rockets += try decoder.decode([RocketModel].self, from: data)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
