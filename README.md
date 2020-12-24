@@ -1,5 +1,8 @@
 # SpaceX
 
+[![LICENSE](https://img.shields.io/github/license/victorshinya/spacex-rockets)](https://github.com/victorshinya/spacex-rockets/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/victorshinya/spacex-rockets/pulls)
+
 An iOS application to display all SpaceX rockets. No 3rd-party library required.
 
 <div align="center">
